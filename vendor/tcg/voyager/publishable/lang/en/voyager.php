@@ -354,6 +354,12 @@ return [
         'user'           => 'User|Users',
         'user_link_text' => 'View all users',
         'user_text'      => 'You have :count :string in your database. Click on button below to view all users.',
+        'table'          => 'Table|Tables',
+        'table_link_text'=> 'View all Tables',
+        'table_text'     => 'You have :count :string in your database. Click on button below to view all Tables.',
+        'reservation'    => 'Reservation',
+        'reservation_link_text' => 'View all reservation',
+        'reservation_text'      => 'You have :count :string in your database. Click on button below to view all reservation.',
     ],
 
     'form' => [

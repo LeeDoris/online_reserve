@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Resources\TableResource;
+use App\Models\Table;
 use Illuminate\Http\Request;
 
 /*
@@ -13,6 +15,14 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+
+Route::group(['prefix' => 'v1', 'middleware' => 'api', 'namespace' => 'Admin'], function () {
+    Route::resource('/tables', 'TablesController');
+//    Route::get('test', 'TablesController@index');
+    Route::get('test', function (){
+        return TableResource::collection(Table::all());
+    });
 });

@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Resources\TableResource;
+use App\Models\Table;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class TablesController extends Controller
 {
+//    protected $tableTransformer;
+//
+//    public function __construct()
+//    {
+//        $this->middleware('authorized:table');
+//    }
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +32,7 @@ class TablesController extends Controller
      */
     public function create()
     {
-        //
+//
     }
 
     /**

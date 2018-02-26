@@ -2,6 +2,8 @@
 
 namespace TCG\Voyager;
 
+use App\Models\Reservation;
+use App\Models\Table;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Filesystem\Filesystem;
@@ -54,6 +56,8 @@ class Voyager
         'Role'       => Role::class,
         'Setting'    => Setting::class,
         'User'       => User::class,
+        'Table'      => Table::class,
+        'Reservation'=> Reservation::class,
     ];
 
     public $setting_cache = null;
