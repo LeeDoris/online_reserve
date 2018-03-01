@@ -20,6 +20,15 @@ class VoyagerAuthController extends Controller
         return Voyager::view('voyager::login');
     }
 
+    public function register()
+    {
+        if (Auth::user()) {
+            return redirect()->route('voyager.dashboard');
+        }
+
+        return Voyager::view('voyager::register');
+    }
+
     public function postLogin(Request $request)
     {
         $this->validateLogin($request);

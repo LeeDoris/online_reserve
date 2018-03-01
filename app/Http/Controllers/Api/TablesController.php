@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Resources\TableResource;
 use App\Models\Table;
@@ -9,12 +9,6 @@ use App\Http\Controllers\Controller;
 
 class TablesController extends Controller
 {
-//    protected $tableTransformer;
-//
-//    public function __construct()
-//    {
-//        $this->middleware('authorized:table');
-//    }
     /**
      * Display a listing of the resource.
      *
@@ -22,7 +16,7 @@ class TablesController extends Controller
      */
     public function index()
     {
-        //
+        return TableResource::collection(Table::all());
     }
 
     /**
@@ -32,7 +26,7 @@ class TablesController extends Controller
      */
     public function create()
     {
-//
+        //
     }
 
     /**

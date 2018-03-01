@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Resources\TableResource;
-use App\Models\Table;
 use Illuminate\Http\Request;
 
 /*
@@ -19,10 +17,10 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
-Route::group(['prefix' => 'v1', 'middleware' => 'api', 'namespace' => 'Admin'], function () {
+
+Route::group(['prefix' => 'v1', 'middleware' => 'api', 'namespace' => 'Api'], function () {
+    Route::resource('/reservations', 'ReservationController');
     Route::resource('/tables', 'TablesController');
-//    Route::get('test', 'TablesController@index');
-    Route::get('test', function (){
-        return TableResource::collection(Table::all());
-    });
+    Route::resource('/users', 'UsersController');
+    Route::post('/reservations/check', 'ReservationController@check');
 });

@@ -216,11 +216,25 @@ class VoyagerServiceProvider extends ServiceProvider
      */
     protected function registerWidgets()
     {
-        $default_widgets = ['TCG\\Voyager\\Widgets\\UserDimmer', 'TCG\\Voyager\\Widgets\\PostDimmer', 'TCG\\Voyager\\Widgets\\PageDimmer'];
-        $widgets = config('voyager.dashboard.widgets', $default_widgets);
+        $default_admin_widgets = ['TCG\\Voyager\\Widgets\\UserDimmer', 'TCG\\Voyager\\Widgets\\PostDimmer', 'TCG\\Voyager\\Widgets\\PageDimmer'];
+        $admin_widgets = config('voyager.dashboard.admin_widgets', $default_admin_widgets);
 
-        foreach ($widgets as $widget) {
-            Widget::group('voyager::dimmers')->addWidget($widget);
+        $default_manager_widgets = ['TCG\\Voyager\\Widgets\\UserDimmer', 'TCG\\Voyager\\Widgets\\PostDimmer', 'TCG\\Voyager\\Widgets\\PageDimmer'];
+        $manager_widgets = config('voyager.dashboard.manager_widgets', $default_manager_widgets);
+
+        $default_user_widgets = ['TCG\\Voyager\\Widgets\\UserDimmer', 'TCG\\Voyager\\Widgets\\PostDimmer', 'TCG\\Voyager\\Widgets\\PageDimmer'];
+        $user_widgets = config('voyager.dashboard.user_widgets', $default_user_widgets);
+
+        foreach ($admin_widgets as $admin_widget) {
+            Widget::group('voyager::admin_dimmers')->addWidget($admin_widget);
+        }
+
+        foreach ($manager_widgets as $manager_widget) {
+            Widget::group('voyager::manager_dimmers')->addWidget($manager_widget);
+        }
+
+        foreach ($user_widgets as $user_widget) {
+            Widget::group('voyager::user_dimmers')->addWidget($user_widget);
         }
     }
 

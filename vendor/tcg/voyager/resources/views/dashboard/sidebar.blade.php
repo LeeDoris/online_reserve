@@ -31,5 +31,12 @@
         </div>
 
         {!! menu('admin', 'admin_menu') !!}
+        {{--@if( Auth::user()->role_id == 1 )--}}
+            {{--{!! menu('admin', 'admin_menu') !!}--}}
+        {{--@elseif( Auth::user()->role_id == 3 )--}}
+            {{--{!! menu('manager') !!}--}}
+        {{--@elseif( Auth::user()->role_id == 2 )--}}
+            {{--{!! menu('user') !!}--}}
+        {{--@endif--}}
     </nav>
 </div>

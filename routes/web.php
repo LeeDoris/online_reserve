@@ -12,13 +12,14 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.home');
 });
 
+Route::get('/reserve', 'PagesController@reservation');
+Route::get('/contact', 'PagesController@contact');
+Route::post('/contact', 'PagesController@contactStore');
+
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();

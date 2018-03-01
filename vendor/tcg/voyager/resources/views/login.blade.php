@@ -81,6 +81,13 @@
                         <span class="signingin hidden"><span class="voyager-refresh"></span> {{ __('voyager.login.loggingin') }}...</span>
                         <span class="signin">{{ __('voyager.generic.login') }}</span>
                     </button>
+                    <button type="button" class="btn btn-block login-button" style="float: right">
+                        <a href="{{ url('/admin/register') }}"> <span class="signin">REGISTER</span></a>
+                    </button>
+
+                    <div style="position: absolute;right: 0; bottom: 0">
+                        <a href="{{ url('/') }}"><span>BACK TO HOME</span><i class="voyager-forward"></i></a>
+                    </div>
 
               </form>
 

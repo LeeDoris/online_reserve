@@ -21,6 +21,7 @@ Route::group(['as' => 'voyager.'], function () {
 
     Route::get('login', ['uses' => $namespacePrefix.'VoyagerAuthController@login',     'as' => 'login']);
     Route::post('login', ['uses' => $namespacePrefix.'VoyagerAuthController@postLogin', 'as' => 'postlogin']);
+    Route::get('register', ['uses' => $namespacePrefix.'VoyagerAuthController@register', 'as' => 'register']);
 
     Route::group(['middleware' => 'admin.user'], function () use ($namespacePrefix) {
         event(new RoutingAdmin());

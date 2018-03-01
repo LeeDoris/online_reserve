@@ -165,9 +165,16 @@ return [
             ],
         ],
 
-        'widgets' => [
+        'admin_widgets' => [
             'TCG\\Voyager\\Widgets\\UserDimmer',
             'TCG\\Voyager\\Widgets\\TableDimmer',
+            'TCG\\Voyager\\Widgets\\ReservationDimmer',
+        ],
+        'manager_widgets' => [
+            'TCG\\Voyager\\Widgets\\TableDimmer',
+            'TCG\\Voyager\\Widgets\\ReservationDimmer',
+        ],
+        'user_widgets' => [
             'TCG\\Voyager\\Widgets\\ReservationDimmer',
         ],
 
