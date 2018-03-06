@@ -20,6 +20,7 @@ class UsersController extends Controller
     public function reservations()
     {
         $id = Auth::id();
+//        dd(ReservationResource::collection(Reservation::all()->where('user_id', '=', $id)));
         return ReservationResource::collection(Reservation::all()->where('user_id', '=', $id));
     }
 }

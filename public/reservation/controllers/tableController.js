@@ -41,6 +41,24 @@
                     });
             };
 
+            var loadTablesByPage = function(page, perPage) {
+                $scope.loading = true;
+                tableService.all(page, perPage)
+                    .success(function(response){
+                        $scope.pages = [];
+                        $scope.tablesBackend = response.data;
+                        $scope.currentPage = response.paginator.current_page;
+                        $scope.lastPage = response.paginator.last_page;
+                        for (i=1; i<=$scope.lastPage; i++){
+                            $scope.pages.push(i);
+                        }
+                        $scope.loading = false;
+                    });
+                $scope.currentPage = page;
+            }
+
+            loadTablesByPage(1,7);
+
             //search reservations
             $scope.searchReservations = function (day, month, year, time) {
                 $scope.hideSpinner = false;
