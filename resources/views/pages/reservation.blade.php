@@ -35,6 +35,7 @@
                         <input type="submit" class="btn btn-success" value="Search" />
                     </div>
                 </form>
+
                 <div class="tables-container row">
                     <div class="col-md-2 restaurant-table " ng-repeat="table in tables">
                         <h3 style="cursor:pointer" tooltip-html-unsafe='<p>Position:@{{table.position}}</p><img style="display:block;" width="320" height="225" src="@{{table.image_url}}"/><p>Description: @{{table.description}}</p>' tooltip-placement="right" tooltip-append-to-body="false">Table No. @{{table.number}}</h3>

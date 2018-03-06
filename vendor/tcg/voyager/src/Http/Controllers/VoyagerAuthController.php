@@ -5,6 +5,9 @@ namespace TCG\Voyager\Http\Controllers;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Response;
 use TCG\Voyager\Facades\Voyager;
 
 class VoyagerAuthController extends Controller
@@ -18,6 +21,12 @@ class VoyagerAuthController extends Controller
         }
 
         return Voyager::view('voyager::login');
+    }
+
+    public function auth()
+    {
+        if(Auth::check()) return Response::json(['status' => 'OK', 'account' => Auth::user()->toArray()], 200);
+        return Response::json(['status' => 'error'], 403);
     }
 
     public function register()
@@ -44,9 +53,15 @@ class VoyagerAuthController extends Controller
 
         $credentials = $this->credentials($request);
 
-        if ($this->guard()->attempt($credentials, $request->has('remember'))) {
-            return $this->sendLoginResponse($request);
+        if (Auth::attempt(Input::only('email','password')))
+        {
+//            dd(Auth::user());
+            return Redirect::intended('/');
         }
+
+//        if ($this->guard()->attempt($credentials, $request->has('remember'))) {
+//            return $this->sendLoginResponse($request);
+//        }
 
         // If the login attempt was unsuccessful we will increment the number of attempts
         // to login and redirect the user back to the login form. Of course, when this

@@ -15,11 +15,13 @@ class ReservationCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data' => $this->collection,
-            'table_number' => new TableResource($this),
-            'links' => [
-                'self' => 'link-value',
-            ],
+            'id' => (string) $this->id,
+            'user_id' => (string) $this->user_id,
+            'table_id' => (string) $this->table_id,
+            'table_number' => (string) Table::find($this->table_id)->number,
+            'reservation_start' => (string) $this->reservation_start,
+            'reservation_end' => (string) $this->reservation_end,
+            'active' => (string) $this->active
         ];
     }
 }

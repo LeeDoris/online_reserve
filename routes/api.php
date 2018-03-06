@@ -21,6 +21,8 @@ use Illuminate\Http\Request;
 Route::group(['prefix' => 'v1', 'middleware' => 'api', 'namespace' => 'Api'], function () {
     Route::resource('/reservations', 'ReservationController');
     Route::resource('/tables', 'TablesController');
-    Route::resource('/users', 'UsersController');
+//    Route::resource('/users', 'UsersController');
     Route::post('/reservations/check', 'ReservationController@check');
+    Route::get('/auth', '\TCG\Voyager\Http\Controllers\VoyagerAuthController@auth');
+    Route::get('/users/reservations', 'UsersController@reservations');
 });

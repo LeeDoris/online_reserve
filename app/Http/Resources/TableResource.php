@@ -20,7 +20,7 @@ class TableResource extends Resource
             'seats' => $this->seats,
             'position' => $this->position,
             'description' => $this->description,
-            'available' => $this->available,
+            'available' => (string) $this->available,
             'image_url' => $this->image_url
         ];
     }

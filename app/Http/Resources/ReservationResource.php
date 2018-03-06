@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Table;
 use Illuminate\Http\Resources\Json\Resource;
 
 class ReservationResource extends Resource
@@ -14,23 +15,15 @@ class ReservationResource extends Resource
      */
     public function toArray($request)
     {
+        Resource::withoutWrapping();
         return [
-//            'id' => $this->id,
-//            'user_id' => $this->user_id,
-//            'name' => UserResource::collection($this->name),
-//            'table_id' => $this->table_id,
-//            'reservation_start' => $this->reservation_start,
-//            'reservation_end' => $this->reservation_end,
-//            'seats' => $this->seats,
-//            'active' => $this->active
-            'id' => $this->id,
-            'user_id' => $this->user_id,
-//            'username' => $this->seats,
-            'table_id' => $this->table_id,
-//            'table_number' => new TableResource($this),
-            'reservation_start' => $this->reservation_start,
-            'reservation_end' => $this->reservation_end,
-            'active' => $this->active
+            'id' => (string) $this->id,
+            'user_id' => (string) $this->user_id,
+            'table_id' => (string) $this->table_id,
+            'table_number' => (string) Table::find($this->table_id)->number,
+            'reservation_start' => (string) $this->reservation_start,
+            'reservation_end' => (string) $this->reservation_end,
+            'active' => (string) $this->active
         ];
     }
 }

@@ -2,7 +2,10 @@
 <html>
 <head>
     <title>HOTPOT HERO</title>
+    {{--<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">--}}
+    <link href="{{ asset('css/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" media="all">
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all">
+    <link href="{{ asset('css/toaster.css') }}" rel="stylesheet" type="text/css" media="all">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" media="all" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -15,21 +18,19 @@
     <script src="{{ asset('js/custom.js') }}"></script>
 </head>
 <body ng-app="restaurantApp">
+<toaster-container></toaster-container>
 @include('partials.navigation')
 @yield('content')
 @include('partials.footer')
 
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-
 {{--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>--}}
-{{--<script src="https://code.angularjs.org/1.2.16/angular-route.min.js"></script>--}}
-{{--<script src="https://code.angularjs.org/1.2.16/angular-animate.min.js" ></script>--}}
 <script src="{{ asset('js/angular.min.js') }}"></script>
 <script src="{{ asset('js/angular-route.min.js') }}"></script>
 <script src="{{ asset('js/angular-animate.min.js') }}" ></script>
 
 <script src="{{ asset('js/ui-bootstrap-tpls-0.11.0.min.js') }}" ></script>
-{{--<script src="http://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/0.4.4/toaster.js"></script>--}}
+<script src="{{ asset('js/toaster.js') }}" ></script>
 <script src="{{ asset('js/angular-file-upload.min.js') }}" ></script>
 <script src="{{ asset('reservation/app.js') }}"></script>
 <script src="{{ asset('reservation/services/tableService.js') }}"></script>

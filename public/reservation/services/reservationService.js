@@ -15,13 +15,6 @@
 				show: function(id){
 					return $http.get('api/v1/reservations/' +  id);
 				},
-				update: function(id, username, table, start, end, active){
-					return $http({
-						method: 'PUT',
-						url: 'api/v1/reservations/' + id,
-						params: {username:username, table:table, start: start, end: end, active:active}
-					});
-				},
 				delete: function(id){
 					return $http({
 						method: 'DELETE',
