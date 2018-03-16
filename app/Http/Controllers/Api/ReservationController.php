@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Resources\ReservationResource;
+use App\Mail\ReservationEmail;
+use App\Mail\ReservationFullEmail;
 use App\Models\Reservation;
 use App\Models\Table;
 use Carbon\Carbon;
@@ -10,8 +12,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
-use TCG\Voyager\Contracts\User;
+//use TCG\Voyager\Contracts\User;
+use App\User;
+use Snowfire\Beautymail\Beautymail;
+use TCG\Voyager\Models\Setting;
 
 class ReservationController extends Controller
 {
@@ -64,6 +70,9 @@ class ReservationController extends Controller
         $reservation->seats = $seats;
         $reservation->active = 1;
         $reservation->save();
+        $setting = Setting::where('key', 'reservation.email')->first();
+        $email = User::find($userId)->email;
+        Mail::to($email)->send(new ReservationEmail($reservation, $setting));
     }
 
     /**
@@ -125,14 +134,38 @@ class ReservationController extends Controller
         $minute = $time[1];
         $date = Carbon::create($year, $month, $day, $hour, $minute, 0);
 
-        $reservations = Reservation::all();
+        $reservations = Reservation::all()->where('active',1);
         $reservedTables = [];
         foreach ($reservations as $reservation) {
             if ($date->between($reservation->reservation_start, $reservation->reservation_start->addHours(3))) {
                 $reservedTables[] = $reservation->table_id;
             }
         }
+        if (sizeof($reservedTables) < 20) {
+            return Response::json(['data' => $reservedTables]);
+        } else {
+            $userId = Auth::id();
 
-        return Response::json(['data' => $reservedTables]);
+            $unactive = Reservation::where('active', 0)->count();
+            $interval = (int) Setting::where('key', 'interval.time')->first()->value;
+            $wait_time = ($unactive + 1) * $interval;
+//            dd('unactive',$unactive,'interval', $interval);
+//            dd($wait_time);
+            $new_date = $date->addMinutes($wait_time);
+            $reservation = new Reservation();
+            $reservation->user_id = $userId;
+            $reservation->reservation_start = $new_date;
+            $reservation->reservation_end = $new_date->addHours(3);
+            $reservation->active = 0;
+            $reservation->save();
+
+            $email = User::find($userId)->email;
+            $setting = Setting::where('key', 'reservationfull.email')->first()->value;
+            Mail::to($email)->send(new ReservationFullEmail($reservation, $setting, $wait_time));
+            return Response::json([
+                'data' => $reservedTables,
+                'tips' => $setting . $wait_time . " minute",
+            ]);
+        }
     }
 }

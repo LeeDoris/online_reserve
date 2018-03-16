@@ -13,6 +13,7 @@
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "league/fractal": "^0.17.0",
+        "snowfire/beautymail": "dev-master",
         "tcg/voyager": "^1.0",
         "vinkla/hashids": "^3.3"
     },
@@ -60,9 +61,9 @@
         "optimize-autoloader": true
     },
     "repositories": {
-        "hooks": {
+        "packagist": {
             "type": "composer",
-            "url": "https://larapack.io"
+            "url": "https://packagist.phpcomposer.com"
         }
     }
 }

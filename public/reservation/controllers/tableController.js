@@ -10,6 +10,7 @@
             $scope.end = 23;
             $scope.hours = [];
             $scope.reservedTables = [];
+            $scope.tips = [];
             var currentDate = new Date();
             $scope.currentTime = currentDate.getHours() + ':00';
             //$scope.time = $scope.currentTime;
@@ -47,11 +48,11 @@
                     .success(function(response){
                         $scope.pages = [];
                         $scope.tablesBackend = response.data;
-                        $scope.currentPage = response.paginator.current_page;
-                        $scope.lastPage = response.paginator.last_page;
-                        for (i=1; i<=$scope.lastPage; i++){
-                            $scope.pages.push(i);
-                        }
+                        $scope.currentPage = response.date;
+                        // $scope.lastPage = response.paginator.last_page;
+                        // for (i=1; i<=$scope.lastPage; i++){
+                        //     $scope.pages.push(i);
+                        // }
                         $scope.loading = false;
                     });
                 $scope.currentPage = page;
@@ -66,6 +67,8 @@
                     .success(function (response) {
                         // console.log(response.data)
                         $scope.reservedTables = response.data;
+                        $scope.tips = response.tips;
+                        console.log($scope.reservedTables.length);
                         $scope.hideSpinner = true;
                     });
                 loadTables();

@@ -60,7 +60,7 @@
             <div class="login-container" style="top: 30%">
                 <p>REGISTER BELOW:</p>
 
-                <form action="{{ route('register') }}" method="POST">
+                <form action="{{ url('/register') }}" method="POST">
                     {{ csrf_field() }}
                     <div class="form-group form-group-default" id="nameGroup">
                         <label>Name</label>

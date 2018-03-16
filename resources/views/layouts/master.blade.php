@@ -38,7 +38,7 @@
 <script src="{{ asset('reservation/services/userService.js') }}"></script>
 <script src="{{ asset('reservation/controllers/tableController.js') }}"></script>
 <script src="{{ asset('reservation/controllers/usersController.js') }}"></script>
-<script src="{{ asset('reservation/controllers/reservationsController.js') }}"></script>
+{{--<script src="{{ asset('reservation/controllers/reservationsController.js') }}"></script>--}}
 <script src="{{ asset('reservation/directives/disableAnimation.js') }}"></script>
 </body>
 </html>

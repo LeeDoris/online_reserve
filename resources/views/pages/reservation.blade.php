@@ -36,6 +36,10 @@
                     </div>
                 </form>
 
+                <div>
+                    <h4 style="margin-top: 40px" ng-show="reservedTables.length==20">@{{ tips }}</h4>
+                </div>
+
                 <div class="tables-container row">
                     <div class="col-md-2 restaurant-table " ng-repeat="table in tables">
                         <h3 style="cursor:pointer" tooltip-html-unsafe='<p>Position:@{{table.position}}</p><img style="display:block;" width="320" height="225" src="@{{table.image_url}}"/><p>Description: @{{table.description}}</p>' tooltip-placement="right" tooltip-append-to-body="false">Table No. @{{table.number}}</h3>

@@ -5710,5 +5710,121 @@
             "obfuscate",
             "youtube"
         ]
+    },
+    {
+        "name": "pelago/emogrifier",
+        "version": "v2.0.0",
+        "version_normalized": "2.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/MyIntervals/emogrifier.git",
+            "reference": "8babf8ddbf348f26b29674e2f84db66ff7e3d95e"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://files.phpcomposer.com/files/MyIntervals/emogrifier/8babf8ddbf348f26b29674e2f84db66ff7e3d95e.zip",
+            "reference": "8babf8ddbf348f26b29674e2f84db66ff7e3d95e",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^5.5.0 || ~7.0.0 || ~7.1.0 || ~7.2.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^4.8.0",
+            "squizlabs/php_codesniffer": "^3.1.0"
+        },
+        "time": "2018-01-05 23:30:21",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.1.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Pelago\\": "Classes/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "John Reeve",
+                "email": "jreeve@pelagodesign.com"
+            },
+            {
+                "name": "Cameron Brooks"
+            },
+            {
+                "name": "Jaime Prado"
+            },
+            {
+                "name": "Roman Ožana",
+                "email": "ozana@omdesign.cz"
+            },
+            {
+                "name": "Oliver Klee",
+                "email": "github@oliverklee.de"
+            },
+            {
+                "name": "Zoli Szabó",
+                "email": "zoli.szabo+github@gmail.com"
+            }
+        ],
+        "description": "Converts CSS styles into inline style attributes in your HTML code",
+        "homepage": "https://www.myintervals.com/emogrifier.php",
+        "keywords": [
+            "css",
+            "email",
+            "pre-processing"
+        ]
+    },
+    {
+        "name": "snowfire/beautymail",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Snowfire/Beautymail.git",
+            "reference": "cc964baf349e6dfa0709a41686ab2b9d8b30e609"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://files.phpcomposer.com/files/Snowfire/Beautymail/cc964baf349e6dfa0709a41686ab2b9d8b30e609.zip",
+            "reference": "cc964baf349e6dfa0709a41686ab2b9d8b30e609",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/support": "4.*|5.*",
+            "pelago/emogrifier": "@dev",
+            "php": ">=5.4.0"
+        },
+        "time": "2017-12-01 16:32:21",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "Snowfire\\Beautymail\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Emil Sundberg",
+                "email": "emil@snowfire.net"
+            }
+        ],
+        "description": "Send beautiful html emails with Laravel",
+        "keywords": [
+            "email",
+            "html",
+            "laravel"
+        ]
     }
 ]

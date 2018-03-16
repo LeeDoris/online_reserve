@@ -178,6 +178,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Vinkla\Hashids\HashidsServiceProvider::class,
+        Snowfire\Beautymail\BeautymailServiceProvider::class,
 
     ],
 

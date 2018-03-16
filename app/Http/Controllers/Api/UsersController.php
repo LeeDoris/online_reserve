@@ -21,6 +21,6 @@ class UsersController extends Controller
     {
         $id = Auth::id();
 //        dd(ReservationResource::collection(Reservation::all()->where('user_id', '=', $id)));
-        return ReservationResource::collection(Reservation::all()->where('user_id', '=', $id));
+        return ReservationResource::collection(Reservation::all()->where('user_id', $id))->where('active', 1);
     }
 }
