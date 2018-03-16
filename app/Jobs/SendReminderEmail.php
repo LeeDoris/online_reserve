@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Console\Commands\SendStarterEmail;
+use App\Mail\TipsEmail;
 use App\Models\Reservation;
 use App\User;
 use Carbon\Carbon;
@@ -18,15 +19,15 @@ class SendReminderEmail implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $email;
+//    protected $email;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($email)
+    public function __construct()
     {
-        $this->email = $email;
+//        $this->email = $email;
     }
 
     /**
@@ -36,19 +37,25 @@ class SendReminderEmail implements ShouldQueue
      */
     public function handle()
     {
-        $email = [];
-        $now = Carbon::now();
-        $interval = (int) Setting::where('key', 'advance.time')->first()->value;
-        $reservations = Reservation::all()->where('reservation_start', $now->addMinutes($interval));
-//        var_dump($reservations);
-        foreach ($reservations as $reservation) {
-            $email[] = User::find($reservation->user_id)->email;
-        }
+//        $email = [];
+//        $now = Carbon::now();
+//        $interval = (int) Setting::where('key', 'advance.time')->first()->value;
+//        $reservations = Reservation::all()->where('reservation_start', $now->addMinutes($interval));
+////        var_dump($reservations);
+//        foreach ($reservations as $reservation) {
+//            $email[] = User::find($reservation->user_id)->email;
+//        }
 
-        Mail::queue('emails.tips', [], function ($mail) use ($email) {
-            $mail -> to($email)
-                ->from('249834096@qq.com')
-                ->subject('Remind Email');
-        })->send(new SendStarterEmail());
+//        Mail::queue('emails.tips', [], function ($mail) use ($email) {
+//            $mail -> to($email)
+//                ->from('249834096@qq.com')
+//                ->subject('Remind Email');
+//        })->send(new SendStarterEmail());
+//
+//        Mail::send('emails.test', [], function ($msg) {
+//            $msg->from('249834096@qq.com', 'guoxun');
+//            $msg->to('liangze_li@163.com', 'guoxun')->subject('This is a demo about sending emails to myself');
+//        });
+        Mail::to('liangze_li@163.com')->send(new TipsEmail());
     }
 }

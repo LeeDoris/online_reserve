@@ -133,7 +133,6 @@ class ReservationController extends Controller
         $hour = $time[0];
         $minute = $time[1];
         $date = Carbon::create($year, $month, $day, $hour, $minute, 0);
-
         $reservations = Reservation::all()->where('active',1);
         $reservedTables = [];
         foreach ($reservations as $reservation) {

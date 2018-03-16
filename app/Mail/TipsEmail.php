@@ -28,6 +28,7 @@ class TipsEmail extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->from('249834096@qq.com')
+            ->view('emails.test');
     }
 }
