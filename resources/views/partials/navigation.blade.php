@@ -1,68 +1,53 @@
-<div class="header">
-    <div class="container">
-        <div class="logo">
-            <a href="index.html"><img src="images/logo-front.png" class="img-responsive" alt=""></a>
-        </div>
-        <div class="header-left">
-            <div class="head-nav">
-                <span class="menu"> </span>
-                <ul>
-                    <li><a href="{{ url('/') }}">Home</a></li>
-                    <li><a href="{{ url('/reserve') }}">Reservation</a></li>
-                    <li><a href="{{ url('/contact') }}">Contact</a></li>
-                    <div class="clearfix"></div>
-                </ul>
-                <!-- script-for-nav -->
-                <script>
-                    $("span.menu").click(function () {
-                        $(".head-nav ul").slideToggle(300, function () {
-                            // Animation complete.
-                        });
-                    });
-                </script>
-                <!-- script-for-nav -->
-            </div>
-            <div class="header-right1">
-                <ul>
-                    @if (Auth::guest())
-                        <li><a href="{{ url('/admin/login') }}">LOGIN &nbsp;<i class="fa fa-sign-in"></i></a></li>
-                        {{--<li><a href="{{ url('/register') }}">Register <i class="fa fa-btn fa-user"></i></a></li>--}}
-                    @else
-                        <li class="dropdown" id="nav-mark-btn" >
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
-
-                            <ul class="dropdown-menu" id="mark-info" style="padding: 0;width: 134px;min-width: 0;margin: 0;">
-                                <li><a href="{{ url('/admin') }}">Dashboard  </a> </li>
-                                <li>
-                                    <a href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        Logout
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        {{ csrf_field() }}
-                                    </form>
-                                </li>
+<header class="htc__header bg--white">
+    <!-- Start Mainmenu Area -->
+    <div id="sticky-header-with-topbar" class="mainmenu__wrap sticky__header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-sm-4 col-md-6 order-1 order-lg-1">
+                    <div class="logo">
+                        <a href="{{ url('/') }}">
+                            <img src="{{ asset('images/logo-front.png') }}" alt="logo images">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-sm-4 col-md-2 order-3 order-lg-2">
+                    <div class="main__menu__wrap">
+                        <nav class="main__menu__nav d-none d-lg-block">
+                            <ul class="mainmenu">
+                                <li><a href="{{ url('/') }}">Home</a></li>
+                                <li><a href="{{ url('/reserve') }}">Reservation</a></li>
+                                <li><a href="{{ url('/contact') }}">Contact</a></li>
                             </ul>
-                        </li>
-                    @endif
-                </ul>
+                        </nav>
+
+                    </div>
+                </div>
+                <div class="col-lg-1 col-sm-4 col-md-4 order-2 order-lg-3">
+                    <div class="header__right d-flex justify-content-end">
+                        <div class="log__in">
+                            {{--<a class="accountbox-trigger" href="#"><i class="zmdi zmdi-account-o"></i></a>--}}
+                            @if (Auth::guest())
+                                <a href="{{ url('/admin/login') }}"><i class="zmdi zmdi-account-o"></i></a>
+                            @else
+                                <a href="{{ route('logout') }}">
+                                    {{--{{ Auth::user()->name }}--}}
+                                    LOGOUT
+                                </a>
+                            @endif
+                        </div>
+                        <div class="shopping__cart">
+                            <a class="minicart-trigger" href="#"><i class="zmdi zmdi-shopping-basket"></i></a>
+                            <div class="shop__qun">
+                                <span>03</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            {{--<div class="header-right1">--}}
-                {{--<div class="cart box_1">--}}
-                    {{--<a href="checkout.html">--}}
-                        {{--<h3><span class="simpleCart_total"> $0.00 </span> (<span id="simpleCart_quantity"--}}
-                                                                                 {{--class="simpleCart_quantity"> 0 </span>--}}
-                            {{--items)<img src="images/bag.png" alt=""></h3>--}}
-                    {{--</a>--}}
-                    {{--<div class="clearfix"></div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-            <div class="clearfix"></div>
+            <!-- Mobile Menu -->
+            <div class="mobile-menu d-block d-lg-none"></div>
+            <!-- Mobile Menu -->
         </div>
-        <div class="clearfix"></div>
     </div>
-</div>
+    <!-- End Mainmenu Area -->
+</header>

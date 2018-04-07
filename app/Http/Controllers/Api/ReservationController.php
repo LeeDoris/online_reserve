@@ -60,19 +60,26 @@ class ReservationController extends Controller
         $hour = $time[0];
         $minute = $time[1];
         $date = Carbon::create($year, $month, $day, $hour, $minute, 0);
+        $today = Carbon::today();
+        $tomorrow = Carbon::tomorrow();
         $seats = Table::find($tableId)->seats;
 
-        $reservation = new Reservation();
-        $reservation->user_id = $userId;
-        $reservation->table_id = $tableId;
-        $reservation->reservation_start = $date;
-        $reservation->reservation_end = $date->addHours(3);
-        $reservation->seats = $seats;
-        $reservation->active = 1;
-        $reservation->save();
-        $setting = Setting::where('key', 'reservation.email')->first();
-        $email = User::find($userId)->email;
-        Mail::to($email)->send(new ReservationEmail($reservation, $setting));
+        $checkout = Reservation::where('user_id', $userId)->whereBetween('reservation_start', [$today, $tomorrow])->count();
+        if ($checkout > 2) {
+            return Response::json(['error' => 'Sorry about that one customer just could order two tables in one day!']);
+        }{
+            $reservation = new Reservation();
+            $reservation->user_id = $userId;
+            $reservation->table_id = $tableId;
+            $reservation->reservation_start = $date;
+            $reservation->reservation_end = $date->addHours(3);
+            $reservation->seats = $seats;
+            $reservation->active = 1;
+            $reservation->save();
+            $setting = Setting::where('key', 'reservation.email')->first();
+            $email = User::find($userId)->email;
+            Mail::to($email)->send(new ReservationEmail($reservation, $setting));
+        }
     }
 
     /**
@@ -145,7 +152,7 @@ class ReservationController extends Controller
         } else {
             $userId = Auth::id();
 
-            $unactive = Reservation::where('active', 0)->count();
+            $unactive = Reservation::where('active', 0)->whereBetween('reservation_start',[$date, $date->addHour(3)])->count();
             $interval = (int) Setting::where('key', 'interval.time')->first()->value;
             $wait_time = ($unactive + 1) * $interval;
 //            dd('unactive',$unactive,'interval', $interval);

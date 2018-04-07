@@ -82,11 +82,15 @@
 
             $scope.makeReservation = function (tableId, tableNumber, day, month, year, time) {
                 if ($scope.logged == 'OK') {
-                    reservationService.create(tableId, day, month, year, time);
-                    $scope.reservedTables.push(tableId);
-                    //raise an event and send it to the root scope
-                    $rootScope.$broadcast('reservation:made');
-                    toaster.pop('success', '', 'Table' + tableNumber + ' booked for ' + day + '/' + month + '/' + year + ' ' + time);
+                    var create = reservationService.create(tableId, day, month, year, time);
+                    if (create) {
+                        toaster.pop('error', "Sorry about that one customer just could order two tables in one day!");
+                    } else {
+                        $scope.reservedTables.push(tableId);
+                        //raise an event and send it to the root scope
+                        $rootScope.$emit('reservation:made');
+                        toaster.pop('success', '', 'Table' + tableNumber + ' booked for ' + day + '/' + month + '/' + year + ' ' + time);
+                    }
                 } else {
                     //alert('You must be logged in to make reservations');
                     toaster.pop('error', "Please login", "You must be logged in to make reservations");

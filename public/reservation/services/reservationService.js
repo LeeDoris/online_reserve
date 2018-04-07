@@ -10,6 +10,8 @@
 						method: 'POST',
 						url: 'api/v1/reservations',
 						params: {table_id: tableId, day:day, month:month, year:year, time:time}
+					}).success(function (req) {
+						return req;
 					});
 				},
 				show: function(id){

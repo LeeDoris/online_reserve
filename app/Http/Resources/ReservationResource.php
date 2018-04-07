@@ -22,6 +22,7 @@ class ReservationResource extends Resource
             'user_id' => (string) $this->user_id,
             'table_id' => (string) $this->table_id,
             'table_number' => (string) Table::find($this->table_id)->number,
+            'image_url' => (string) Table::find($this->table_id)->image_url,
             'reservation_start' => (string) $this->reservation_start,
             'reservation_end' => (string) $this->reservation_end,
             'active' => (string) $this->active

@@ -1,28 +1,37 @@
-<!DOCTYPE HTML>
-<html>
+<!doctype html>
+<html class="no-js" lang="zxx">
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>HOTPOT HERO</title>
-    {{--<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">--}}
-    <link href="{{ asset('css/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" media="all">
-    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all">
-    <link href="{{ asset('css/toaster.css') }}" rel="stylesheet" type="text/css" media="all">
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" media="all" />
+    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400,700' rel='stylesheet' type='text/css'>
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
-{{--    <link rel="stylesheet" href="{{ asset('css/flexslider.css') }}" type="text/css" media="screen" />--}}
-    <script src="{{ asset('js/simpleCart.min.js') }}"> </script>
-    <script src="{{ asset('js/custom.js') }}"></script>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ asset('css/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/plugins.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/toaster.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style1.css') }}">
+
+    <!-- Cusom css -->
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+    <!-- Modernizer js -->
+    <script src="{{ asset('js/vendor/modernizr-3.5.0.min.js') }}"></script>
 </head>
+
 <body ng-app="restaurantApp">
 <toaster-container></toaster-container>
 @include('partials.navigation')
 @yield('content')
 @include('partials.footer')
+@include('partials.cart')
 
+<script src="{{asset('js/vendor/jquery-3.2.1.min.js')}}"></script>
+<script src="{{asset('js/popper.min.js')}}"></script>
+<script src="{{asset('js/bootstrap.min.js')}}"></script>
+<script src="{{asset('js/plugins.js')}}"></script>
+<script src="{{asset('js/active.js')}}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 {{--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>--}}
 <script src="{{ asset('js/angular.min.js') }}"></script>

@@ -16,7 +16,7 @@
 
 			$scope.deleteReservation = function(id,index){
 				reservationService.delete(id);
-				$rootScope.$broadcast('reservation:deleted');
+				$rootScope.$emit('reservation:deleted');
 				$scope.userReservations.splice(index,1);
 			};
 
