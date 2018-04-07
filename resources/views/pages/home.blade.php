@@ -18,7 +18,6 @@
                                         @if (\Illuminate\Support\Facades\Auth::guest())
                                             <h3>You must be logged in to make reservation</h3>
                                         @else
-                                            @if()
                                             <h3 style="color: black;;">Seats are available. Walk in directly!</h3>
                                             <div class="src__btn">
                                                 <a href="#">Join the ueue</a>
