@@ -28,4 +28,5 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api', 'namespace' => 'Api'], fu
     Route::post('/queue', 'QueueController@queue');
     Route::post('/queue/check', 'QueueController@check');
     Route::delete('/queue/{id}', 'QueueController@delete');
+    Route::get('/layout', 'ReservationController@layout');
 });

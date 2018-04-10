@@ -150,4 +150,10 @@ class ReservationController extends Controller
         }
         return Response::json(['data' => $reservedTables]);
     }
+
+    public function layout()
+    {
+        $layout = Setting::where('key', 'admin.admin_restaurant_layout')->first()->value;
+        return Response::json(['data' => $layout]);
+    }
 }

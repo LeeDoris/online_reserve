@@ -47,6 +47,12 @@
 						method: 'DELETE',
 						url: 'api/v1/queue/' + id
 					})
+				},
+				layout: function () {
+					return $http({
+						method: 'GET',
+						url: 'api/v1/layout'
+					})
 				}
 			}
 			

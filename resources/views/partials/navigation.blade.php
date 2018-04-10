@@ -40,9 +40,9 @@
                                 </form>
                             @endif
                         </div>
-                        <div class="shopping__cart">
+                        <div class="shopping__cart" ng-controller="tableController">
                             <a class="minicart-trigger" href="#"><i class="zmdi zmdi-shopping-basket"></i></a>
-                            <div class="shop__qun" ng-controller="tableController">
+                            <div class="shop__qun">
                                 <span>@{{ tablesNum }}</span>
                             </div>
                         </div>

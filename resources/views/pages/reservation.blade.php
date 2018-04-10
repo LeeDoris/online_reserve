@@ -131,8 +131,8 @@
                 <div class="col-lg-12 col-md-12">
                     <div class="team text-center foo">
                         <div class="team__thumb">
-                            <a href="#">
-                                <img src="{{ asset('images/bg/kitchen.jpg') }}" alt="team images">
+                            <a href="javascript:;">
+                                <img src="storage/@{{ image }}" alt="team images">
                             </a>
                         </div>
                     </div>
