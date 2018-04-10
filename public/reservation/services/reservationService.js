@@ -29,6 +29,24 @@
 						url: 'api/v1/reservations/check',
 						params: {day:day, month:month, year:year, time:time}
 					});
+				},
+				queue: function () {
+					return $http({
+						method: 'POST',
+						url: 'api/v1/queue',
+					});
+				},
+				queueCheck: function () {
+					return $http({
+						method: 'POST',
+						url: 'api/v1/queue/check'
+					})
+				},
+				queueDelete: function (id) {
+					return $http({
+						method: 'DELETE',
+						url: 'api/v1/queue/' + id
+					})
 				}
 			}
 			

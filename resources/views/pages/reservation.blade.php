@@ -146,8 +146,8 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12">
                     <div class="section__title title__style--2 service__align--center">
-                        <h2 class="title__line">Frequantly Ask Question</h2>
-                        <p>The process of our service </p>
+                        <h2 class="title__line">Frequently Ask Question</h2>
+                        <p>with answers </p>
                     </div>
                 </div>
             </div>
@@ -158,22 +158,13 @@
                             <div class="acc-header" role="tab" id="headingOne">
                                 <h5>
                                     <a data-toggle="collapse" href="#collapseOne" role="button" aria-expanded="true"
-                                       aria-controls="collapseOne"><span>1.</span> Djanj sit amet, consectetur
-                                        adipisicing elit, sed do eiusmod temrem ?</a>
+                                       aria-controls="collapseOne"><span>1.</span> What is the table size ?</a>
                                 </h5>
                             </div>
 
                             <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne"
                                  data-parent="#accordion">
-                                <div class="card-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                    eiusmod tempor incididunt ut labore et dolore magaliqua. oenim ad minim veniam, quis
-                                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    Duidolreprehendevoluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                    Excepteur sint occaecupidatat proident, sunt in culpa qui officideserunt mollitanim
-                                    id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                                    accusantium d sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco labor fqa cabfm szdt jkasp faq havrtm
+                                <div class="card-body">small table: 0.6m x 0.6m; middle table: diameter = 1m ; large table: diameter = 1.8m
                                 </div>
                             </div>
                         </div>
@@ -182,22 +173,13 @@
                                 <h5>
                                     <a class="collapsed" data-toggle="collapse" href="#collapseTwo" role="button"
                                        aria-expanded="false" aria-controls="collapseTwo">
-                                        <span>2.</span> Djanj sit amet, consectetur adipisicing elit, sed do eiusmod tem
-                                        pororem ?.
+                                        <span>2.</span> At which tables can see the outside views ?
                                     </a>
                                 </h5>
                             </div>
                             <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo"
                                  data-parent="#accordion">
-                                <div class="card-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                    eiusmod tempor incididunt ut labore et dolore magaliqua. oenim ad minim veniam, quis
-                                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    Duidolreprehendevoluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                    Excepteur sint occaecupidatat proident, sunt in culpa qui officideserunt mollitanim
-                                    id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                                    accusantium d sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco labor fqa cabfm szdt jkasp faq havrtm
+                                <div class="card-body"> Table 1 - 12 (can refer to the floor plan) since they are near windows
                                 </div>
                             </div>
                         </div>
@@ -206,22 +188,14 @@
                                 <h5>
                                     <a class="collapsed" data-toggle="collapse" href="#collapseThree" role="button"
                                        aria-expanded="false" aria-controls="collapseThree">
-                                        <span>3.</span> Djanj sit amet, consectetur adipisicing elit, sed do eiusmod tem
-                                        pororem ?.
+                                        <span>3.</span> Can I book all tables at a particular day?
                                     </a>
                                 </h5>
                             </div>
                             <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree"
                                  data-parent="#accordion">
-                                <div class="card-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                    eiusmod tempor incididunt ut labore et dolore magaliqua. oenim ad minim veniam, quis
-                                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    Duidolreprehendevoluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                    Excepteur sint occaecupidatat proident, sunt in culpa qui officideserunt mollitanim
-                                    id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                                    accusantium d sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco labor fqa cabfm szdt jkasp faq havrtm
+                                <div class="card-body">Cannot. A customer can book 2 tables at most per day. For customers who
+                                    always book table but never appear, we will prohibit their account to book table any more
                                 </div>
                             </div>
                         </div>

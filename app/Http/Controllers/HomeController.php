@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use TCG\Voyager\Models\Setting;
 
 class HomeController extends Controller
@@ -12,10 +11,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+//    public function __construct()
+//    {
+//        $this->middleware('auth');
+//    }
 
     /**
      * Show the application dashboard.
@@ -24,7 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $queue = Setting::where('key', 'admin.queue')->value;
-        return view('pages.home')->with($queue);
+        $queue = (int) Setting::where('key', 'admin.queue')->first()->value;
+        return view('pages.home',compact('queue'));
     }
 }

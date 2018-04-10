@@ -8,7 +8,7 @@
 			var getUserReservations = function(){
 				userService.reservations()
 					.success(function(response){
-						$scope.userReservations = response;
+						$scope.userReservations = $.makeArray(response.data);
 					});
 			};
 
@@ -16,7 +16,7 @@
 
 			$scope.deleteReservation = function(id,index){
 				reservationService.delete(id);
-				$rootScope.$emit('reservation:deleted');
+				$rootScope.$broadcast('reservation:deleted');
 				$scope.userReservations.splice(index,1);
 			};
 

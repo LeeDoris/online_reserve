@@ -29,16 +29,21 @@
                             @if (Auth::guest())
                                 <a href="{{ url('/admin/login') }}"><i class="zmdi zmdi-account-o"></i></a>
                             @else
-                                <a href="{{ route('logout') }}">
-                                    {{--{{ Auth::user()->name }}--}}
+                                <a href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
                                     LOGOUT
                                 </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
                             @endif
                         </div>
                         <div class="shopping__cart">
                             <a class="minicart-trigger" href="#"><i class="zmdi zmdi-shopping-basket"></i></a>
-                            <div class="shop__qun">
-                                <span>03</span>
+                            <div class="shop__qun" ng-controller="tableController">
+                                <span>@{{ tablesNum }}</span>
                             </div>
                         </div>
                     </div>

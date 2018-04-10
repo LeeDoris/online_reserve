@@ -25,4 +25,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api', 'namespace' => 'Api'], fu
     Route::post('/reservations/check', 'ReservationController@check');
     Route::get('/auth', '\TCG\Voyager\Http\Controllers\VoyagerAuthController@auth');
     Route::get('/users/reservations', 'UsersController@reservations');
+    Route::post('/queue', 'QueueController@queue');
+    Route::post('/queue/check', 'QueueController@check');
+    Route::delete('/queue/{id}', 'QueueController@delete');
 });

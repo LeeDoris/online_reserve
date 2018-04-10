@@ -15,7 +15,7 @@ class ReservationResource extends Resource
      */
     public function toArray($request)
     {
-        Resource::withoutWrapping();
+//        Resource::withoutWrapping();
 //        dd($this->table_id);
         return [
             'id' => (string) $this->id,

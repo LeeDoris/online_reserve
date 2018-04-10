@@ -1,6 +1,6 @@
 (function () {
     angular.module('restaurantApp')
-        .controller('tableController', ["$scope", "$rootScope", "$upload", "tableService", "reservationService", "userService", "toaster", function ($scope, $rootScope, $upload, tableService, reservationService, userService, toaster) {
+        .controller('tableController', ["$scope", "$rootScope", "$timeout", "$upload", "tableService", "reservationService", "userService", "toaster", function ($scope, $rootScope, $timeout, $upload, tableService, reservationService, userService, toaster) {
 
             $scope.logged = null;
             $scope.hideSpinner = true;
@@ -63,14 +63,14 @@
             //search reservations
             $scope.searchReservations = function (day, month, year, time) {
                 $scope.hideSpinner = false;
-                reservationService.check(day, month, year, time)
-                    .success(function (response) {
-                        // console.log(response.data)
-                        $scope.reservedTables = response.data;
-                        $scope.tips = response.tips;
-                        console.log($scope.reservedTables.length);
-                        $scope.hideSpinner = true;
-                    });
+                $timeout(function () {
+                    reservationService.check(day, month, year, time)
+                        .success(function (response) {
+                            $scope.reservedTables = response.data;
+                            $scope.tablesNum = response.data.length;
+                            $scope.hideSpinner = true;
+                        });
+                });
                 loadTables();
             };
 
@@ -82,15 +82,17 @@
 
             $scope.makeReservation = function (tableId, tableNumber, day, month, year, time) {
                 if ($scope.logged == 'OK') {
-                    var create = reservationService.create(tableId, day, month, year, time);
-                    if (create) {
-                        toaster.pop('error', "Sorry about that one customer just could order two tables in one day!");
-                    } else {
-                        $scope.reservedTables.push(tableId);
-                        //raise an event and send it to the root scope
-                        $rootScope.$emit('reservation:made');
-                        toaster.pop('success', '', 'Table' + tableNumber + ' booked for ' + day + '/' + month + '/' + year + ' ' + time);
-                    }
+                    reservationService.create(tableId, day, month, year, time)
+                        .success(function (response) {
+                            if (response.error) {
+                                toaster.pop('error', "Sorry about that one customer just could order two tables in one day!");
+                            } else {
+                                $scope.reservedTables.push(tableId);
+                                //raise an event and send it to the root scope
+                                $rootScope.$broadcast('reservation:made');
+                                toaster.pop('success', '', 'Table' + tableNumber + ' booked for ' + day + '/' + month + '/' + year + ' ' + time);
+                            }
+                        });
                 } else {
                     //alert('You must be logged in to make reservations');
                     toaster.pop('error', "Please login", "You must be logged in to make reservations");

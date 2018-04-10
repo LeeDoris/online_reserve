@@ -1,4 +1,4 @@
-<div class="cartbox-wrap">
+<div class="cartbox-wrap" ng-controller="usersController">
     <div class="cartbox text-right">
         <button class="cartbox-close"><i class="zmdi zmdi-close"></i></button>
         <div class="cartbox__inner text-left">
@@ -12,7 +12,7 @@
                     <a class="food__btn" href="{{ url('/admin') }}">Dashboard</a>
                     {{--<a class="food__btn" href="#"><span>Checkout</span></a>--}}
                 </div>
-                <div class="cartbox__items" ng-controller="usersController">
+                <div class="cartbox__items">
                     <!-- Cartbox Single Item -->
                     {{--<div class="panel panel-primary breathe" ng-controller="usersController">--}}
                         <div class="panel-heading">

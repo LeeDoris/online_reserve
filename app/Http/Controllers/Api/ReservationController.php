@@ -64,10 +64,10 @@ class ReservationController extends Controller
         $tomorrow = Carbon::tomorrow();
         $seats = Table::find($tableId)->seats;
 
-        $checkout = Reservation::where('user_id', $userId)->whereBetween('reservation_start', [$today, $tomorrow])->count();
+        $checkout = Reservation::where('user_id', $userId)->where('active', "1")->whereBetween('reservation_start', [$today, $tomorrow])->count();
         if ($checkout > 2) {
             return Response::json(['error' => 'Sorry about that one customer just could order two tables in one day!']);
-        }{
+        }else{
             $reservation = new Reservation();
             $reservation->user_id = $userId;
             $reservation->table_id = $tableId;
@@ -76,7 +76,7 @@ class ReservationController extends Controller
             $reservation->seats = $seats;
             $reservation->active = 1;
             $reservation->save();
-            $setting = Setting::where('key', 'reservation.email')->first();
+            $setting = Setting::where('key', 'admin.reservation.email')->first();
             $email = User::find($userId)->email;
             Mail::to($email)->send(new ReservationEmail($reservation, $setting));
         }
@@ -140,6 +140,7 @@ class ReservationController extends Controller
         $hour = $time[0];
         $minute = $time[1];
         $date = Carbon::create($year, $month, $day, $hour, $minute, 0);
+
         $reservations = Reservation::all()->where('active',1);
         $reservedTables = [];
         foreach ($reservations as $reservation) {
@@ -147,31 +148,6 @@ class ReservationController extends Controller
                 $reservedTables[] = $reservation->table_id;
             }
         }
-        if (sizeof($reservedTables) < 20) {
-            return Response::json(['data' => $reservedTables]);
-        } else {
-            $userId = Auth::id();
-
-            $unactive = Reservation::where('active', 0)->whereBetween('reservation_start',[$date, $date->addHour(3)])->count();
-            $interval = (int) Setting::where('key', 'interval.time')->first()->value;
-            $wait_time = ($unactive + 1) * $interval;
-//            dd('unactive',$unactive,'interval', $interval);
-//            dd($wait_time);
-            $new_date = $date->addMinutes($wait_time);
-            $reservation = new Reservation();
-            $reservation->user_id = $userId;
-            $reservation->reservation_start = $new_date;
-            $reservation->reservation_end = $new_date->addHours(3);
-            $reservation->active = 0;
-            $reservation->save();
-
-            $email = User::find($userId)->email;
-            $setting = Setting::where('key', 'reservationfull.email')->first()->value;
-            Mail::to($email)->send(new ReservationFullEmail($reservation, $setting, $wait_time));
-            return Response::json([
-                'data' => $reservedTables,
-                'tips' => $setting . $wait_time . " minute",
-            ]);
-        }
+        return Response::json(['data' => $reservedTables]);
     }
 }

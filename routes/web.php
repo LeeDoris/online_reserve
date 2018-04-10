@@ -11,13 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('pages.home');
-});
+Route::get('/', 'HomeController@index');
 
 Route::get('/reserve', 'PagesController@reservation');
 Route::get('/contact', 'PagesController@contact');
 Route::post('/contact', 'PagesController@contactStore');
+//Route::post('/queue', 'HomeController@queue');
 
 Auth::routes();
 

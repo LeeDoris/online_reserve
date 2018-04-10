@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="slider__area slider--two">
+    <div class="slider__area slider--two" ng-controller="queueController">
         <div class="slider__activation--1">
             <!-- Start Single Slide -->
             <div class="slide fullscreen bg-image--7 poss--relative">
@@ -16,12 +16,19 @@
                                     </div>
                                     <div class="slider__input">
                                         @if (\Illuminate\Support\Facades\Auth::guest())
-                                            <h3>You must be logged in to make reservation</h3>
+                                            <h3>You must be logged in to make reservation!</h3>
                                         @else
-                                            <h3 style="color: black;;">Seats are available. Walk in directly!</h3>
-                                            <div class="src__btn">
-                                                <a href="#">Join the ueue</a>
-                                            </div>
+                                            @if($queue == 0)
+                                                <h3 style="color: black;margin-top: 15px;">Seats are available. Walk in directly!</h3>
+                                            @else
+                                                <h3 style="color: black;margin-top: 15px;" ng-show="isQueue == 'NO'">Join the queue for a random seat now!</h3>
+                                                <div class="src__btn" style="padding-left: 200px">
+                                                    <a ng-click="makeQueue()" ng-show="isQueue == 'NO'">Join the Queue</a>
+                                                    {{--<a ng-show="queued.status = '200'">Queue Success</a>--}}
+                                                </div>
+
+                                                <h3 style="color: black;margin-top: 15px; padding-right: 200px" ng-show="isQueue == 'YES'">Queue Success! You can go here about @{{ queued.reservation_start }}</h3>
+                                            @endif
                                         @endif
                                     </div>
                                 </div>
@@ -46,10 +53,10 @@
                         <div class="fd__about">
                             <div class="section__title service__align--left">
                                 <p>Best product, Best service</p>
-                                <h2 class="title__line">About HOTPOT HERO</h2>
+                                <h2 class="title__line">Recent Promotion</h2>
                             </div>
-                            <h4>Best Service  For Our Customer</h4>
-                            <p>Lorem ipsum dolor sit amet, cotnsectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                            <h4>Best Promotion For Our Customers</h4>
+                            <p>In chinese new year period, all customers can enjoy 50% discount for lamb roll and dried pork slices</p>
                         </div>
                     </div>
                 </div>
@@ -69,11 +76,11 @@
                             </div>
                         </div>
                         <div class="about__details">
-                            <h2>For All <span>“Montanara”</span> HOTPOT</h2>
-                            <p>Don’t Delay to Order</p>
-                            <div class="about__btn">
-                                <a class="food__btn white--btn" href="about-us.html">Order Now</a>
-                            </div>
+                            <h2>For All <span>“Lamb roll”</span> dishes</h2>
+                            <p>Don’t hesitate to Order</p>
+                            {{--<div class="about__btn">--}}
+                                {{--<a class="food__btn white--btn" href="about-us.html">Order Now</a>--}}
+                            {{--</div>--}}
                         </div>
                     </div>
                 </div>
@@ -93,11 +100,11 @@
                             </div>
                         </div>
                         <div class="about__details">
-                            <h2>For All <span>“Montanara”</span> HOTPOT</h2>
-                            <p>Don’t Delay to Order</p>
-                            <div class="about__btn">
-                                <a class="food__btn white--btn" href="#">Order Now</a>
-                            </div>
+                            <h2>For All <span>“Pork slices”</span> dishes</h2>
+                            <p>Don’t hesitate to Order</p>
+                            {{--<div class="about__btn">--}}
+                                {{--<a class="food__btn white--btn" href="#">Order Now</a>--}}
+                            {{--</div>--}}
                         </div>
                     </div>
                 </div>
@@ -112,8 +119,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section__title service__align--left">
-                            <p>The process of our service </p>
-                            <h2 class="title__line">Our Special HOTPOT</h2>
+                            <p>The popular choices of </p>
+                            <h2 class="title__line">Combos</h2>
                         </div>
                     </div>
                 </div>
@@ -124,15 +131,15 @@
                             <div class="pizza__thumb">
                                 <img src="{{ asset('images/product/hotpot/1.jpg') }}" alt="pizza images">
                                 <div class="pizza__hover__action">
-                                    <span class="pizza__prize">$80</span>
+                                    <span class="pizza__prize">$40</span>
                                 </div>
                             </div>
                             <div class="pizza__details">
-                                <h2 class="pizza__title"><a href="#">Ddfgdfgdfg</a></h2>
-                                <p>Lorem ipsum dolor sit amet, consectadipisicing labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
-                                <div class="pizza__btn">
-                                    <a class="food__btn white--btn theme--hover" href="#">Order Online</a>
-                                </div>
+                                <h2 class="pizza__title"><a href="#">Combo 1</a></h2>
+                                <p>1 x lamb rolls, 1 x beef slices, 1 x carrot slices, 1 x mushroom, 2 x soft drinks, unlimited rice. Spend $40 Only ! </p>
+                                {{--<div class="pizza__btn">--}}
+                                    {{--<a class="food__btn white--btn theme--hover" href="#">Order Online</a>--}}
+                                {{--</div>--}}
                             </div>
                         </div>
                     </div>
@@ -147,11 +154,11 @@
                                 </div>
                             </div>
                             <div class="pizza__details">
-                                <h2 class="pizza__title"><a href="#">Sdfgdfg</a></h2>
-                                <p>Lorem ipsum dolor sit amet, consectadipisicing labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
-                                <div class="pizza__btn">
-                                    <a class="food__btn white--btn theme--hover" href="#">Order Online</a>
-                                </div>
+                                <h2 class="pizza__title"><a href="#">Combo 2</a></h2>
+                                <p>1 x pork slices, 2 x chicken rolls, 1 x potato slices, 2 x any vegetable, 2 x soft drinks, unlimited while rice. Spend $50 Only ! </p>
+                                {{--<div class="pizza__btn">--}}
+                                    {{--<a class="food__btn white--btn theme--hover" href="#">Order Online</a>--}}
+                                {{--</div>--}}
                             </div>
                         </div>
                     </div>
@@ -162,15 +169,15 @@
                             <div class="pizza__thumb">
                                 <img src="{{ asset('images/product/hotpot/1.jpg') }}" alt="pizza images">
                                 <div class="pizza__hover__action">
-                                    <span class="pizza__prize">$70</span>
+                                    <span class="pizza__prize">$30</span>
                                 </div>
                             </div>
                             <div class="pizza__details">
-                                <h2 class="pizza__title"><a href="#">Rdfsdfsf</a></h2>
-                                <p>Lorem ipsum dolor sit amet, consectadipisicing labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
-                                <div class="pizza__btn">
-                                    <a class="food__btn white--btn theme--hover" href="#">Order Online</a>
-                                </div>
+                                <h2 class="pizza__title"><a href="#">Combo 3</a></h2>
+                                <p>1 x Lamb rolls, 2 x any vegetable, 1 x tomato slices, 2 x soft drinks, unlimited while rice. Spend $30 Only ! </p>
+                                {{--<div class="pizza__btn">--}}
+                                    {{--<a class="food__btn white--btn theme--hover" href="#">Order Online</a>--}}
+                                {{--</div>--}}
                             </div>
                         </div>
                     </div>
@@ -178,22 +185,22 @@
                 </div>
             </div>
         </div>
-        <div class="order-now-area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12">
-                        <div class="fd__order__now text-center">
-                            <div class="order__now__inner">
-                                <h6>We Offer Free Delivery</h6>
-                                <h2>Order Now: +123654789</h2>
-                                <p>Extremely thin ,juicy,cheeze,fluffy,crispy & light weight</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="order-now-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+        <div class="fd__order__now text-center">
+            <div class="order__now__inner">
+                 <h6>&nbsp;</h6>
+                 <h2>Welcome to Hotpot Hero!</h2>
+                 <p>&nbsp;</p>
+             </div>
         </div>
-    </section>
+    </div>
+</div>
+</div>
+</div>
+</section>
 
     <section class="fd__counterup__area funfact--2">
         <div class="container">
@@ -257,13 +264,13 @@
         </div>
     </section>
 
-    <section class="resturent__food__menu bg-image--8 section-padding--lg">
+    <section class="restaurant__food__menu bg-image--8 section-padding--lg">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="section__title service__align--center">
                         <p>All delicious hotpot menu  for hotpot lovers</p>
-                        <h2 class="title__line">Restaurant with Special Menu</h2>
+                        <h2 class="title__line">Most popular base soups</h2>
                     </div>
                 </div>
             </div>
@@ -280,14 +287,14 @@
                     <ul class="res__pizz__size d-flex justify-content-center">
                         <li>small <span>$20</span></li>
                         <li>Medium <span>$40</span></li>
-                        <li>Large <span>$50</span></li>
+                        <li>Large <span>$60</span></li>
                     </ul>
-                    <h4><a href="#">Maxican Food Fev</a></h4>
-                    <h6>Friends & Family Restaurant</h6>
-                    <p>Provolone is the second most popular one. Cheddar may be mixed with Mozzarella to preserve armesan may be added to the top of a hotpot,</p>
-                    <div class="res__btn">
-                        <a class="food__btn" href="#">Order Now</a>
-                    </div>
+                    <h4><a href="#">Two-flavor hot pot </a></h4>
+                    <h6>Both spicy and not spicy soup</h6>
+                    <p>The two-flavor hot pot divide into two base soup, which is best for both spicy lover and people who can't bear spicy</p>
+                    {{--<div class="res__btn">--}}
+                        {{--<a class="food__btn" href="#">Order Now</a>--}}
+                    {{--</div>--}}
                 </div>
             </div>
             <!-- End Single Resturent Food -->
@@ -300,16 +307,16 @@
                 </div>
                 <div class="resturent__details d-flex flex-column justify-content-center">
                     <ul class="res__pizz__size d-flex justify-content-center">
-                        <li>small <span>$20</span></li>
-                        <li>Medium <span>$20</span></li>
-                        <li>Large <span>$60</span></li>
+                        <li>small <span>$30</span></li>
+                        <li>Medium <span>$50</span></li>
+                        <li>Large <span>$70</span></li>
                     </ul>
-                    <h4><a href="#">Chongqing asdfsd sdf</a></h4>
-                    <h6>Friends & Family Restaurant</h6>
-                    <p>Provolone is the second most popular one. Cheddar may be mixed with Mozzarella to preserve armesan may be added to the top of a hotpot,</p>
-                    <div class="res__btn">
-                        <a class="food__btn" href="#">Order Now</a>
-                    </div>
+                    <h4><a href="#">Seafood family</a></h4>
+                    <h6>For seafood lovers</h6>
+                    <p>The seafood family base soup is designed for seafood lovers.It is full of many seafood such as prawn, oyster and so on</p>
+                    {{--<div class="res__btn">--}}
+                        {{--<a class="food__btn" href="#">Order Now</a>--}}
+                    {{--</div>--}}
                 </div>
             </div>
             <!-- End Single Resturent Food -->
@@ -326,12 +333,12 @@
                         <li>Medium <span>$40</span></li>
                         <li>Large <span>$20</span></li>
                     </ul>
-                    <h4><a href="#">Sichuan sdfsdf dsfsdf</a></h4>
+                    <h4><a href="#">Sichuan</a></h4>
                     <h6>Friends & Family Restaurant</h6>
                     <p>Provolone is the second most popular one. Cheddar may be mixed with Mozzarella to preserve armesan may be added to the top of a hotpot,</p>
-                    <div class="res__btn">
-                        <a class="food__btn" href="#">Order Now</a>
-                    </div>
+                    {{--<div class="res__btn">--}}
+                        {{--<a class="food__btn" href="#">Order Now</a>--}}
+                    {{--</div>--}}
                 </div>
             </div>
             <!-- End Single Resturent Food -->
@@ -344,16 +351,16 @@
                 </div>
                 <div class="resturent__details d-flex flex-column justify-content-center">
                     <ul class="res__pizz__size d-flex justify-content-center">
-                        <li>small <span>$10</span></li>
-                        <li>Medium <span>$60</span></li>
-                        <li>Large <span>$20</span></li>
+                        <li>small <span>$20</span></li>
+                        <li>Medium <span>$40</span></li>
+                        <li>Large <span>$60</span></li>
                     </ul>
-                    <h4><a href="#">Sichuan sdafsdf asdfsdf</a></h4>
-                    <h6>Friends & Family Restaurant</h6>
-                    <p>Provolone is the second most popular one. Cheddar may be mixed with Mozzarella to preserve armesan may be added to the top of a hotpot,</p>
-                    <div class="res__btn">
-                        <a class="food__btn" href="#">Order Now</a>
-                    </div>
+                    <h4><a href="#">Sichuan mala spicy flavor</a></h4>
+                    <h6>spicy addicts</h6>
+                    <p>The spicy base soup, especially designed for spicy addicts who cannot live without spicy. Welcome to challenge our spicy hot pot</p>
+                    {{--<div class="res__btn">--}}
+                        {{--<a class="food__btn" href="#">Order Now</a>--}}
+                    {{--</div>--}}
                 </div>
             </div>
             <!-- End Single Resturent Food -->
@@ -365,8 +372,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="section__title service__align--center">
-                        <p>The process of our service </p>
-                        <h2 class="title__line">Most popular Cuisine For Client Demand</h2>
+                        <p>The TOP 3 popular kinds of </p>
+                        <h2 class="title__line"> Frequently ordered dishes</h2>
                     </div>
                 </div>
             </div>
@@ -382,14 +389,14 @@
                                 <img src="{{ asset('images/product/popular/sm-img/1.png') }}" alt="small images">
                             </div>
                             <div class="demand__food__prize">
-                                <span>$80</span>
+                                <span>$18</span>
                             </div>
                         </div>
                         <div class="clint__demand__inner">
-                            <h4><a href="#">Cheef</a></h4>
+                            <h4><a href="#">Pork slices</a></h4>
                             <div class="clt__delevery__time">
-                                <p>Food Type :Mixed Fruit Custard</p>
-                                <p>Delivery Time : 60 min, Delivery Cost : Free</p>
+                                <p>Food Type :Meat</p>
+                                <p>Taste : soft </p>
                             </div>
                             <ul class="rating">
                                 <li><i class="zmdi zmdi-star"></i></li>
@@ -413,14 +420,14 @@
                                 <img src="{{ asset('images/product/popular/sm-img/2.png') }}" alt="small images">
                             </div>
                             <div class="demand__food__prize">
-                                <span>$80</span>
+                                <span>$25</span>
                             </div>
                         </div>
                         <div class="clint__demand__inner">
-                            <h4><a href="#">Pork</a></h4>
+                            <h4><a href="#">Lamb roll</a></h4>
                             <div class="clt__delevery__time">
-                                <p>Food Type :Mixed Fruit Custard</p>
-                                <p>Delivery Time : 60 min, Delivery Cost : Free</p>
+                                <p>Food Type : Meat</p>
+                                <p>Taste : Soft & appetizing</p>
                             </div>
                             <ul class="rating">
                                 <li><i class="zmdi zmdi-star"></i></li>
@@ -444,14 +451,14 @@
                                 <img src="{{ asset('images/product/popular/sm-img/3.png') }}" alt="small images">
                             </div>
                             <div class="demand__food__prize">
-                                <span>$80</span>
+                                <span>$23</span>
                             </div>
                         </div>
                         <div class="clint__demand__inner">
-                            <h4><a href="#">Checken</a></h4>
+                            <h4><a href="#">Beef roll</a></h4>
                             <div class="clt__delevery__time">
-                                <p>Food Type :Mixed Fruit Custard</p>
-                                <p>Delivery Time : 60 min, Delivery Cost : Free</p>
+                                <p>Food Type : Meat</p>
+                                <p>Taste : Soft & appetizing</p>
                             </div>
                             <ul class="rating">
                                 <li><i class="zmdi zmdi-star"></i></li>
@@ -477,18 +484,18 @@
                         <div class="single__testimonial d-flex justify-content-between flex-wrap">
                             <!-- Start Testimonial -->
                             <div class="testimonial-2">
-                                <p>Lorem ipsum dolor samconsectetuadipisicing elit, kjjnin khk seeiusmod tempor incididunt ut labore et dolore maaliqua. veniam,</p>
+                                <p>One of the best hot pot restaurant in Singapore that reminds me of my childhood life</p>
                                 <div class="fd__test__info">
-                                    <h6>Mily Cyrus</h6>
+                                    <h6>Bruce Sim</h6>
                                     <span>Food Expert</span>
                                 </div>
                             </div>
                             <!-- End Testimonial -->
                             <!-- Start Testimonial -->
                             <div class="testimonial-2">
-                                <p>Lorem ipsum dolor samconsectetuadipisicing elit, kjjnin khk seeiusmod tempor incididunt ut labore et dolore maaliqua. veniam,</p>
+                                <p>Best for spicy lovers. Soft lamb rolls, fresh beef rolls and pork slides. Very enjoyable !</p>
                                 <div class="fd__test__info">
-                                    <h6>Mily Cyrus</h6>
+                                    <h6>Mike Tang</h6>
                                     <span>Food Expert</span>
                                 </div>
                             </div>
@@ -550,8 +557,8 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12">
                     <div class="subscribe__inner">
-                        <h2>Subscribe to our newsletter</h2>
-                        <div id="mc_embed_signup">
+                        <h2>Welcome to Hot Pot Hero !</h2>
+                        {{--<div id="mc_embed_signup">
                             <div id="enter__email__address">
                                 <form action="#" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
                                     <div id="mc_embed_signup_scroll" class="htc__news__inner">
@@ -565,7 +572,7 @@
                                     </div>
                                 </form>
                             </div>
-                        </div>
+                        </div>--}}
                     </div>
                 </div>
             </div>
