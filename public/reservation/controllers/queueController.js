@@ -45,7 +45,8 @@
                 $timeout(function () {
                     reservationService.queueDelete($scope.queued.id)
                         .success(function () {
-                            $scope.$broadcast('queue:delete')
+                            $scope.$broadcast('queue:delete');
+                            toaster.pop('success','Now it is your turn!')
                         })
                 },$scope.waitTime * 60000)
             };
