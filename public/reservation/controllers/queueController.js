@@ -36,6 +36,7 @@
             var tipsQueue = function () {
                 $timeout(function () {
                     toaster.pop('success', "It will be 2 minutes that you should go to restaurant as soon as possible!", "",)
+                    tipsVoice();
                 },($scope.waitTime - $scope.advance) * 60 * 1000);
                 // ($scope.waitTime - $scope.advance) * 60 * 1000
             };
@@ -46,9 +47,22 @@
                     reservationService.queueDelete($scope.queued.id)
                         .success(function () {
                             $scope.$broadcast('queue:delete');
-                            toaster.pop('success','Now it is your turn!')
+                            toaster.pop('success','Now it is your turn!');
+                            finishVoice()
                         })
                 },$scope.waitTime * 60000)
+            };
+
+            var tipsVoice = function (){
+                //IE9+,Firefox,Chrome均支持<audio/>
+                $('#tips').html('<audio autoplay="autoplay"><source src="Sent.wav"'
+                    + 'type="audio/wav"/><source src="Sent.wav" type="audio/mpeg"/></audio>');
+            };
+
+            var finishVoice = function (){
+                //IE9+,Firefox,Chrome均支持<audio/>
+                $('#online').html('<audio autoplay="autoplay"><source src="Online.wav"'
+                    + 'type="audio/wav"/><source src="Online.wav" type="audio/mpeg"/></audio>');
             };
 
             $scope.$on('queue:made', function (event) {

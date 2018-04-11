@@ -14,6 +14,8 @@
                                         <img class="layear-1" src="{{ asset('images/slider/text/2.png') }}" alt="slider text image">
                                         <img class="layear-2" src="{{ asset('images/slider/text/1.png') }}" alt="slider text image">
                                     </div>
+                                    <div id="tips" style="display:none">123132</div>
+                                    <div id="online" style="display:none">123132</div>
                                     <div class="slider__input">
                                         @if (\Illuminate\Support\Facades\Auth::guest())
                                             <h3>You must be logged in to make reservation!</h3>
